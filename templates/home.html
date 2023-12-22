@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- ... (other head elements) -->
+        <link rel="stylesheet" type="text/css"
+              href="/static/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    </head>
+    <body>
+
+        <header>
+            <h1>Genshinism</h1>
+            <nav>
+                <ul>
+                    <li><a href="/celestia">Celestia</a></li>
+                    <!-- ... other navigation items -->
+                </ul>
+            </nav>
+        </header>
+
+        <div id="left-elements" class="side-elements"></div>
+        <div id="right-elements" class="side-elements"></div>
+
+        <div class="content-container">
+            <main>
+                <section>
+                    <h2>About Genshinism</h2>
+                    <p>Here I will introduce what Genshinism is
+                        all about...</p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <p>Here you can introduce what Genshinism is
+                        all about...</p>
+
+
+
+                    <!-- Add more content -->
+                </section>
+
+                <!-- Additional sections -->
+            </main>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 Genshinism. All rights reserved.</p>
+        </footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Function to create and append the SVGs
+                function fillElementList(containerId, svgs) {
+                    var container = document.getElementById(containerId);
+                    var contentHeight = document.body.offsetHeight;
+                    var filledHeight = 0;
+                    var svgIndex = 0;
+                    var elementHeight = 100;
+
+                    // Clear existing content
+                    container.innerHTML = '';
+
+                    function loadNextImage() {
+                        if (filledHeight >= contentHeight) {
+                            console.log('Filled to content height.');
+                            return; // Stop loading more images
+                        }
+
+                        var img = new Image();
+                        img.src = svgs[svgIndex % svgs.length];
+                        img.onload = function() {
+                            filledHeight += this.height;
+                            container.appendChild(this);
+                            loadNextImage(); // Load the next image after the current one has loaded
+                        };
+                        img.onerror = function() {
+                            console.error("Failed to load image:", this.src);
+                            loadNextImage(); // Attempt to load the next image even if the current one fails
+                        };
+
+                        svgIndex++;
+                    }
+
+                    loadNextImage(); // Start the loading process
+                }
+
+
+
+                // SVG paths
+                var svgs = [
+                    '/static/elements/pyro.svg',
+                    '/static/elements/hydro.svg',
+                    '/static/elements/anemo.svg',
+                    '/static/elements/electro.svg',
+                    '/static/elements/dendro.svg',
+                    '/static/elements/cryo.svg',
+                    '/static/elements/geo.svg',
+                ];
+
+                // Call function for both containers
+                fillElementList('left-elements', svgs);
+                fillElementList('right-elements', svgs);
+            });
+
+
+
+        </script>
+    </body>
+</html>
+
+
